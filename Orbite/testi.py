@@ -126,7 +126,7 @@ def enaka_struktura(luna1, luna2, orbite):
     niz = []
     while True:
         for i in lune(orbite)[iskana]:
-            if
+            if aa
 
 
 
