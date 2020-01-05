@@ -4,6 +4,7 @@ import random
 import os
 import sys
 #import itertools
+#from itertools import permutations
 
 def preberi_orbite(ime_datoteke):
     file = open(ime_datoteke)
@@ -98,7 +99,7 @@ def pot_med(odkod, kam, orbite):
         seznam.append(i)
     seznam.extend(reversed(pot_do_r(kam, pom, orbite)))
     return seznam
-
+'''
 def baza(lune, orbite):
     seznam = []
     for i in lune:
@@ -120,16 +121,31 @@ def sirina_orbite(luna, razdalja, orbite):
             stevec += 1
     return stevec
 
-def enaka_struktura(luna1, luna2, orbite):
-    print(lune(orbite))
-    iskana = luna1
+def naredi_stukturo(luna, orbite):
     niz = []
-    while True:
-        for i in lune(orbite)[iskana]:
-            if aa
+    if luna not in orbite.values():
+        return niz
+    for i in lune(orbite)[luna]:
+        niz.append("A")
+        if i in orbite.values():
+            niz.append(naredi_stukturo(i, orbite))
+    return niz
 
-
-
+def enaka_struktura(luna1, luna2, orbite):
+    strukt1 = naredi_stukturo(luna1, orbite)
+    strukt2 = naredi_stukturo(luna2, orbite)
+    p_1 = permutations(strukt1)
+    p_2 = permutations(strukt2)
+    pom = False
+    for i in list(p_1):
+        for j in list(p_2):
+            if j == i:
+                pom = True
+        if not pom:
+            return False
+        pom = False
+    return True
+'''
 class Test(unittest.TestCase):
     def setUp(self):
         super().setUp()
@@ -182,7 +198,7 @@ class Test(unittest.TestCase):
     except:
         vorbite = None
 
-'''
+
 class Test06(Test):
 
     def test_01_preberi_orbite(self):
@@ -365,7 +381,7 @@ class Test09(Test):
         self.assertEqual(["I"], pot_med("I", "I", self.orbite))
         self.assertEqual(["COM"], pot_med("COM", "COM", self.orbite))
 
-
+'''
     def test_02_baza(self):
         self.assertEqual("D", baza(["I", "E", "J", "K"], self.orbite))
         self.assertTrue(baza(["YOU", "L", "J"], self.orbite) in "JE")
@@ -373,7 +389,7 @@ class Test09(Test):
         self.orbite["M"] = "COM"
         self.assertEqual("COM", baza(["M", "H", "C"], self.orbite))
 
-'''
+
 class Test10(Test):
     def test_01_sirina_orbite(self):
         self.assertEqual(3, sirina_orbite("D", 2, self.orbite))
@@ -519,7 +535,7 @@ class Test10(Test):
         self.assertFalse(enaka_struktura(U, S, orbite7))
         self.assertFalse(enaka_struktura(S, U, orbite7))
 
-'''
+
 class TestKudos(Test):
     def test_01_pari_lun(self):
         COM = "COM"
