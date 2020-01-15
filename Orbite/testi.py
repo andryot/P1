@@ -14,6 +14,7 @@ def preberi_orbite(ime_datoteke):
         slovar.update({pom[1]:pom[0]})
     return slovar
 
+
 def lune(orbite):
     slovar = {}
     for i, j in orbite.items():
@@ -22,6 +23,7 @@ def lune(orbite):
         slovar[j].add(i)
     return slovar
 
+
 def prestej_korake(odkod, kam, orbite):
     stevec = 0
     while odkod != kam:
@@ -29,12 +31,14 @@ def prestej_korake(odkod, kam, orbite):
          stevec += 1
     return stevec
 
+
 def prestej_korake_r(odkod, kam, orbite):
     stevec = 0
     if odkod != kam and odkod in orbite.keys():
         stevec = prestej_korake_r(orbite[odkod], kam, orbite)
         return stevec + 1
     return stevec
+
 
 def n_odvisnikov(luna, orbite):
     pom = 0
@@ -46,6 +50,7 @@ def n_odvisnikov(luna, orbite):
             pom += n_odvisnikov(i, orbite)
     return pom
 
+
 def pot_do(odkod, kam, orbite):
     seznam = []
     ime = odkod
@@ -55,11 +60,13 @@ def pot_do(odkod, kam, orbite):
         seznam.append(ime)
     return seznam
 
+
 def pot_v_niz(pot):
     izpis = ""
     for i in pot:
         izpis += i + " -> "
     return izpis[:-4]
+
 
 def navodila(pot, ime_datoteke):
     dat = open(ime_datoteke, "w")
@@ -70,6 +77,7 @@ def navodila(pot, ime_datoteke):
           dat.write(f"Potem zavijte na {i}.\n")
     dat.write(f"Vaš cilj, {niz[-1]}, bo pod vami.\n")
 
+
 def pot_do_r(odkod, kam, orbite):
     seznam = []
     seznam.append(odkod)
@@ -77,6 +85,7 @@ def pot_do_r(odkod, kam, orbite):
         seznam.extend(pot_do_r(orbite[odkod], kam, orbite))
     return seznam
 #list(itertools.chain.from_iterable(seznam))
+
 
 def odvisniki(luna, orbite):
     mnoz = set()
@@ -87,6 +96,7 @@ def odvisniki(luna, orbite):
         if i in orbite.values():
             mnoz.update(odvisniki(i, orbite))
     return mnoz
+
 
 def pot_med(odkod, kam, orbite):
     pot1 = pot_do_r(odkod,"COM", orbite)
@@ -99,7 +109,8 @@ def pot_med(odkod, kam, orbite):
         seznam.append(i)
     seznam.extend(reversed(pot_do_r(kam, pom, orbite)))
     return seznam
-'''
+
+
 def baza(lune, orbite):
     seznam = []
     for i in lune:
@@ -111,6 +122,7 @@ def baza(lune, orbite):
             pom = i
     return pom
 
+
 def sirina_orbite(luna, razdalja, orbite):
     if razdalja == 0 and luna not in orbite.keys():
         return 1
@@ -120,6 +132,7 @@ def sirina_orbite(luna, razdalja, orbite):
         if prestej_korake_r(j, luna, orbite) == razdalja and (j in odvisnik or j == luna):
             stevec += 1
     return stevec
+
 
 def naredi_stukturo(luna, orbite):
     niz = []
@@ -131,6 +144,8 @@ def naredi_stukturo(luna, orbite):
             niz.append(naredi_stukturo(i, orbite))
     return niz
 
+
+'''
 def enaka_struktura(luna1, luna2, orbite):
     strukt1 = naredi_stukturo(luna1, orbite)
     strukt2 = naredi_stukturo(luna2, orbite)
@@ -146,6 +161,8 @@ def enaka_struktura(luna1, luna2, orbite):
         pom = False
     return True
 '''
+
+
 class Test(unittest.TestCase):
     def setUp(self):
         super().setUp()
