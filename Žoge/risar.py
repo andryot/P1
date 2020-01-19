@@ -1,5 +1,4 @@
 # coding=utf-8
-from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
@@ -111,7 +110,7 @@ def elipsa(x, y, rx, ry, barva=bela, sirina=1):
         obnovi()
     return elipsa
 
-def krog(x, y, r, barva=bela, sirina=3):
+def krog(x, y, r, barva=bela, sirina=1):
     """Nariše krog s polmerom r in središčem v (x, y)."""
     elipsa = widget.scene.addEllipse(-r, -r, 2*r, 2*r, QPen(QBrush(barva), sirina))
     elipsa.setPos(x, y)
