@@ -3,7 +3,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-
 class QGraphicsViewWMouse(QGraphicsView):
     def __init__(self, *args, **kw):
         super(QGraphicsViewWMouse, self).__init__(*args, **kw)
@@ -14,10 +13,12 @@ class QGraphicsViewWMouse(QGraphicsView):
         miska = ev.x(), ev.y()
         super(QGraphicsViewWMouse, self).mouseMoveEvent(ev)
 
+
     def mousePressEvent(self, ev):
         global miska, klik # Takole se programirajo samo zasilni moduli za Programiranje 1!!!
         miska = ev.x(), ev.y()
         klik = True
+        self.stop = 1
         super(QGraphicsViewWMouse, self).mousePressEvent(ev)
 
     def keyPressEvent(self, ev):
@@ -25,6 +26,7 @@ class QGraphicsViewWMouse(QGraphicsView):
         super().keyPressEvent(ev)
         levo = ev.key() == Qt.Key_Left
         desno = ev.key() == Qt.Key_Right
+        print(levo)
 
     def keyReleaseEvent(self, ev):
         global levo, desno
@@ -59,6 +61,9 @@ barve = bela, crna, rdeca, zelena, modra, vijolicna, rumena, siva, rjava = Qt.wh
 barva = QColor
 
 obnavljaj = True
+
+def pozicija(x, y):
+    return x, y
 
 def nakljucna_barva():
     from random import randint
@@ -112,7 +117,7 @@ def elipsa(x, y, rx, ry, barva=bela, sirina=1):
         obnovi()
     return elipsa
 
-def krog(x, y, r, barva=bela, sirina=1):
+def krog(x, y, r, barva=bela, sirina=3):
     """Nariše krog s polmerom r in središčem v (x, y)."""
     elipsa = widget.scene.addEllipse(-r, -r, 2*r, 2*r, QPen(QBrush(barva), sirina))
     elipsa.setPos(x, y)
